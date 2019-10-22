@@ -1,0 +1,32 @@
+<h2>Welcome to LikeTwitter</h2>
+
+<div>
+  <% if current_user %>
+    <p><%= link_to 'Create', new_users_tweet_path %></p>
+    <p><%= link_to 'Profile', users_tweets_path %></p>
+  </br>
+    <% current_user.timeline.each do |line| %>
+      <div>
+        <span>@<%=line.user.nickname%></span></br>
+        <span><%=line.description%></span>
+      </div>
+      </br>
+    <%end%>
+    <h2>who to follow</h2>
+    <% User.all.each do |user| %>
+      <div>
+        <span>@<%=user.nickname%></span></br>
+        <span>
+          <% if current_user.followee?(user)%>
+            <%=link_to 'UnFollow', unfollow_path(user)%>
+          <% else %>
+            <%=link_to 'Follow', follow_path(user)%>
+          <% end %>
+        </span>
+      </div>
+      </br>
+    <%end%>
+  <% else %>
+    <%= link_to 'Sign In To LikeTwitter', new_user_session_path %>
+  <% end %>
+</div>

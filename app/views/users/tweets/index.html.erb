@@ -1,0 +1,21 @@
+<%=link_to 'TimeLine', root_path %>
+</br>
+<% @tweets.each do |tweet| %>
+  <span><%=tweet.description%></span> <span><%= link_to "delete", users_tweet_path(tweet), :method => :delete %></span>
+  </br>
+<%end%>
+
+</br>
+</br>
+</br>
+
+<h2>Followers</h2>
+<% current_user.followers.each do |follower| %>
+  <span>@<%=follower.nickname%></span> <span><%= link_to "delete", '#', :method => :delete %></span>
+  </br>
+<%end%>
+<h2>Following</h2>
+<% current_user.followees.each do |followee| %>
+  <span>@<%=followee.nickname%></span> <span><%= link_to "delete", '#', :method => :delete %></span>
+  </br>
+<%end%>
